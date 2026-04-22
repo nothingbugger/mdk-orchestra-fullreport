@@ -1,0 +1,5 @@
+environment_memory.md: 0 patterns
+hashrate_memory.md: 0 patterns
+maestro_memory.md: 1 patterns
+power_memory.md: 0 patterns
+voltage_memory.md: 0 patterns

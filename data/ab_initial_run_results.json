@@ -1,0 +1,159 @@
+{
+  "run_id": "rich_run_20260421_1650",
+  "scenario": "rich_run_30min_balanced",
+  "seed": 42,
+  "duration_min": 300,
+  "generated_at": "2026-04-21T14:50:00+00:00",
+  "track_a": {
+    "flags_raised": 18,
+    "faults_injected": 13,
+    "faults_caught": 6,
+    "catch_rate": 0.46153846153846156,
+    "total_actions": 18,
+    "action_counts": {
+      "throttle": 10,
+      "alert_operator": 7,
+      "human_review": 1
+    },
+    "autonomy_counts": {
+      "L3_bounded_auto": 10,
+      "L2_suggest": 4,
+      "L4_human_only": 4
+    },
+    "false_positives": 0,
+    "false_positive_rate": 0.0,
+    "total_cost_usd": 3.6138,
+    "median_latency_s": 24.53,
+    "reasoning_snapshots": [
+      {
+        "decision_id": "dec_3a207aa33f56",
+        "flag_id": "flg_00008",
+        "miner_id": "m029",
+        "action": "throttle",
+        "action_params": {
+          "target_hashrate_pct": 0.7,
+          "duration_min": 30,
+          "follow_up": "alert_operator_for_fan_replacement",
+          "co_affected_miner": "m010"
+        },
+        "autonomy_level": "L3_bounded_auto",
+        "confidence": 0.86,
+        "reasoning_trace": "m029 thermal_runaway crit/0.95, chip 89.4\u00b0C sustained 10min (thr 85). Environment specialist: real_signal 0.82 \u2014 site ambient steady 24.6\u201325.1\u00b0C (baseline-normal), but zone-peer m010 also ~90\u00b0C with same fan anomaly pattern; localized cooling failure, not HVAC. Hashrate specialist: real_signal 0.82 \u2014 hashrate stationary at +3.3% vs nominal (\u03c3~0.5, no degradation yet), but fan[2] stuck at ~500\u2013630 RPM vs ~6400 on the other three fans, hot_time_frac=1.0, thermal_stress up to 0.42. Converged read: mechanical fan failure on m029, pre-throttle silicon, imminent DVFS/protection shutdown or device damage if untouched. Both specialists recommended alert_operator, but at 89\u00b0C sustained I will not wait on human ack \u2014 throttle to 70%/30min is reversible, magnitude-capped, within L3 floor, and buys thermal headroom while operator is paged to replace fan[2]. m010 shows same signature in same zone: flagging for operator review but not batching the action (stays under the 5-miner fleet-wide threshold and each needs its own fan diagnosis). L3 on m029, concurrent L2 alert for fan replacement + m010 inspection.",
+        "consulted_agents": [
+          "environment_agent",
+          "voltage_agent"
+        ],
+        "total_cost_usd": 0.17648144999999998,
+        "total_latency_ms": 26838.807916035876,
+        "pending_human_approval": false
+      },
+      {
+        "decision_id": "dec_eb0064117f76",
+        "flag_id": "flg_00016",
+        "miner_id": "m045",
+        "action": "human_review",
+        "action_params": {
+          "recommended_followup": "physical_inspection_hashboard",
+          "suggested_interim": "throttle_or_isolate_pending_review",
+          "affected_miner": "m045"
+        },
+        "autonomy_level": "L4_human_only",
+        "confidence": 0.9,
+        "reasoning_trace": "m045 hashrate_degradation warn/0.85. Hashrate agent: real_signal conf=0.93, severity crit \u2014 flat step-drop plateau to 70.6 TH/s vs 104 expected (\u221232.1%, \u03c3 0.39), power proportionally reduced ~2180W, thermals/fans nominal; classic hashboard-offline signature (likely 1 large or 2 of 4 boards dead). Voltage agent: noise conf=0.82 \u2014 rail stationary 12.01\u201312.12V, no sag/ramp; PSU actually under-stressed because failed board sheds load. Both agents agree miner-local hardware fault, not voltage/thermal/power-supply causal. Synthesis: this is not a degradation trend, it's a completed hardware failure \u2014 throttling won't help (board is already gone), and hashrate cannot be recovered without physical service. Action is not a reversible tuning knob; it's a maintenance dispatch / retire-or-RMA decision. Flow 1 synthesis would suggest L3 throttle on a degrading trend, but the plateau shape means the fault has already landed \u2014 throttling a 3-of-4-board miner further destroys yield with no upside. Queuing for human: schedule hashboard inspection/replacement. L4.",
+        "consulted_agents": [
+          "voltage_agent",
+          "hashrate_agent"
+        ],
+        "total_cost_usd": 0.2659497,
+        "total_latency_ms": 26265.286416048184,
+        "pending_human_approval": true
+      },
+      {
+        "decision_id": "dec_0c9d18f1b534",
+        "flag_id": "flg_00018",
+        "miner_id": "m033",
+        "action": "alert_operator",
+        "action_params": {
+          "recommendation": "schedule_hashboard_replacement",
+          "severity_upgrade": "warn->crit",
+          "miner_id": "m033",
+          "suggested_interim": "throttle_or_take_offline_pending_operator_review"
+        },
+        "autonomy_level": "L4_human_only",
+        "confidence": 0.92,
+        "reasoning_trace": "m033 hashrate_degradation warn/0.85 (rule_engine, ratio 0.687 vs 0.8 threshold). Hashrate agent: real_signal conf=0.95, sev=crit \u2014 flat plateau ~71 TH/s vs 104 expected (\u221231.7%), \u03c3=0.4 TH/s, textbook 1-of-3 hashboard loss on S19j Pro; thermals stationary, rules out throttle/pool. Voltage agent: noise conf=0.88 \u2014 12V rail stationary (\u03c3=0.027V), power draw normal; rules out PSU/upstream. Combined read: confirmed hardware hashboard failure, miner-local, non-thermal, non-electrical. Not reversible via throttle \u2014 throttling a miner already producing 68.7% of spec doesn't recover a dead board and just masks the fault. Correct path is physical hashboard replacement, which is a maintenance action requiring human scheduling. Severity effectively crit per hashrate specialist; no fleet-wide pattern. Alerting operator with replacement recommendation rather than autonomous throttle (no benefit) or L4 shutdown (miner still earning ~69% \u2014 operator decides economics of runtime vs swap). L4 because maintenance dispatch is consequential and not in my L3 envelope.",
+        "consulted_agents": [
+          "voltage_agent",
+          "hashrate_agent"
+        ],
+        "total_cost_usd": 0.2681727,
+        "total_latency_ms": 23957.11504202336,
+        "pending_human_approval": true
+      },
+      {
+        "decision_id": "dec_ab658c42faa0",
+        "flag_id": "flg_00003",
+        "miner_id": "m045",
+        "action": "alert_operator",
+        "action_params": {
+          "recommendation": "schedule hashboard replacement; m045 running at ~68% nominal on 2/3 (or 3/4) boards",
+          "suggested_interim": "throttle_or_leave_running_degraded",
+          "severity_upgrade": "warn->crit_candidate"
+        },
+        "autonomy_level": "L2_suggest",
+        "confidence": 0.88,
+        "reasoning_trace": "m045 hashrate_degradation warn/0.85 (rule_engine: 70.45 vs 104.0 TH/s, ratio 0.68). Hashrate specialist: real_signal conf 0.93, severity crit \u2014 flat plateau across full 30min window (\u03c3\u22480.37), power proportionally reduced to ~2170W, temps stationary, fault_injected=hashboard_failure; textbook 1-of-3 board loss, not throttling/stall. Voltage specialist: noise conf 0.82 \u2014 12V rail stationary (\u03c3\u22480.030V), no correlation to hashrate, rules out PSU/power-delivery cause. Synthesis: miner-local, board-level compute fault; both specialists converge on hashboard failure as root cause. Action: this is not a reversible degradation \u2014 throttling won't recover a dead board and the miner is already effectively self-throttled by the loss. Running degraded at 68% is not dangerous (thermals nominal, power reduced), so no urgent L3 intervention needed. Correct path is human-directed maintenance scheduling (board swap/RMA), which is an L4-class action. Emitting L2 alert with full diagnosis so operator can queue maintenance window. No autonomous action taken.",
+        "consulted_agents": [
+          "voltage_agent",
+          "hashrate_agent"
+        ],
+        "total_cost_usd": 0.27470100000000003,
+        "total_latency_ms": 27091.486582998186,
+        "pending_human_approval": false
+      },
+      {
+        "decision_id": "dec_f5256d488ba3",
+        "flag_id": "flg_00011",
+        "miner_id": "m013",
+        "action": "alert_operator",
+        "action_params": {
+          "recommended_followup": "schedule_maintenance_hashboard_inspection",
+          "suggested_throttle_pct": 0.75,
+          "suggested_throttle_duration_min": 60
+        },
+        "autonomy_level": "L2_suggest",
+        "confidence": 0.9,
+        "reasoning_trace": "m013 hashrate_degradation warn/0.85 (rule_engine: 67.99 vs 104.0 TH/s expected, ratio 0.654 sustained 5min). Hashrate agent: real_signal conf=0.93, severity=crit \u2014 clean step drop to flat plateau ~67.6 TH/s across 30min, textbook hashboard-out signature (~\u221235%, consistent with 1 full board lost + partial on another, or 3-board model at 75%); temps stationary (chip 56-59\u00b0C), fans healthy, power scaled proportionally \u2014 hardware fault, not thermal. Voltage agent: noise conf=0.82 \u2014 rail stationary at 12.05V \u00b10.03V, z=-1.6\u03c3 on worst sample, no sag or ramp; confirms fault is board-level compute, not PSU. Synthesis: both agents agree on root cause (hashboard failure), zero disagreement on domain attribution. This is real hardware loss \u2014 a throttle won't restore the missing board and isn't the right lever; the miner is already running at ~65% of nameplate on its own. Maintenance ticket (board swap) is the correct action, which is L4-class. Escalating to operator with full trace; no autonomous action warranted. L2.",
+        "consulted_agents": [
+          "voltage_agent",
+          "hashrate_agent"
+        ],
+        "total_cost_usd": 0.2655237,
+        "total_latency_ms": 24059.63079200592,
+        "pending_human_approval": false
+      }
+    ],
+    "fault_variety_ticks": {
+      "chip_instability": 13118,
+      "cooling_degradation": 9701,
+      "hashboard_failure": 9791,
+      "power_sag": 9105
+    }
+  },
+  "track_b": {
+    "flags_raised": 18,
+    "faults_injected": 13,
+    "faults_caught": 0,
+    "catch_rate": 0.0,
+    "total_actions": 0,
+    "action_counts": {},
+    "false_positives": 0,
+    "false_positive_rate": 0.0,
+    "total_cost_usd": 0.0,
+    "median_latency_s": 0.0
+  },
+  "comparison": {
+    "catch_rate_delta": 0.0,
+    "note": "Track A only; Track B baseline comparison available from seed-42 A/B run in realistic_b3b723d8"
+  }
+}

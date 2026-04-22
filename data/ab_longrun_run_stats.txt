@@ -1,0 +1,9 @@
+Track A: 825 flags, 27 decisions
+  source_tool: {'xgboost_predictor': 460, 'xgboost_rolling_variance': 7, 'rule_engine': 358}
+  flag_type: {'hashrate_degradation': 504, 'chip_instability_precursor': 7, 'fan_anomaly': 139, 'thermal_runaway': 175}
+  action: {'observe': 12, 'throttle': 14, 'shutdown': 1}
+  autonomy: {'L1_observe': 12, 'L3_bounded_auto': 14, 'L4_human_only': 1}
+  total_cost_usd: $0.0000
+  latency median=141.4s  max=167.5s
+Track B: 825 flags, 825 decisions
+  action: {'alert_operator': 352, 'throttle': 473}

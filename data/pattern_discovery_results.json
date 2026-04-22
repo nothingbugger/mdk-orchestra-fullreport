@@ -1,0 +1,623 @@
+{
+  "meta": {
+    "n_rows": 144000,
+    "n_features": 60,
+    "label_distribution": {
+      "clean": 113642,
+      "current_fault": 26694,
+      "pre_fault": 3664
+    },
+    "fault_types_analyzed": [
+      "chip_instability",
+      "hashboard_failure",
+      "cooling_degradation",
+      "power_sag"
+    ]
+  },
+  "fault_type_analysis": {
+    "chip_instability": {
+      "fault_type": "chip_instability",
+      "n_pre_fault": 1080,
+      "n_clean_sample": 20000,
+      "top10_features": [
+        {
+          "rank": 1,
+          "feature": "hashrate_th_30m_std",
+          "cohens_d": 12.7321,
+          "abs_cohens_d": 12.7321,
+          "mutual_information": 0.1879
+        },
+        {
+          "rank": 2,
+          "feature": "power_w_30m_std",
+          "cohens_d": 12.1163,
+          "abs_cohens_d": 12.1163,
+          "mutual_information": 0.1876
+        },
+        {
+          "rank": 3,
+          "feature": "hashrate_th_5m_std",
+          "cohens_d": 11.4681,
+          "abs_cohens_d": 11.4681,
+          "mutual_information": 0.1833
+        },
+        {
+          "rank": 4,
+          "feature": "temp_chip_c_30m_std",
+          "cohens_d": 10.7982,
+          "abs_cohens_d": 10.7982,
+          "mutual_information": 0.1877
+        },
+        {
+          "rank": 5,
+          "feature": "power_w_5m_std",
+          "cohens_d": 10.7276,
+          "abs_cohens_d": 10.7276,
+          "mutual_information": 0.1824
+        },
+        {
+          "rank": 6,
+          "feature": "hashrate_th_1m_std",
+          "cohens_d": 9.1851,
+          "abs_cohens_d": 9.1851,
+          "mutual_information": 0.1816
+        },
+        {
+          "rank": 7,
+          "feature": "temp_chip_c_5m_std",
+          "cohens_d": 8.6729,
+          "abs_cohens_d": 8.6729,
+          "mutual_information": 0.1827
+        },
+        {
+          "rank": 8,
+          "feature": "power_w_1m_std",
+          "cohens_d": 8.0727,
+          "abs_cohens_d": 8.0727,
+          "mutual_information": 0.1792
+        },
+        {
+          "rank": 9,
+          "feature": "fan_rpm_mean_30m_std",
+          "cohens_d": 6.981,
+          "abs_cohens_d": 6.981,
+          "mutual_information": 0.1886
+        },
+        {
+          "rank": 10,
+          "feature": "fan_rpm_mean_5m_std",
+          "cohens_d": 5.8035,
+          "abs_cohens_d": 5.8035,
+          "mutual_information": 0.18
+        }
+      ],
+      "top5_features": [
+        "hashrate_th_30m_std",
+        "power_w_30m_std",
+        "hashrate_th_5m_std",
+        "temp_chip_c_30m_std",
+        "power_w_5m_std"
+      ],
+      "clustering": {
+        "kmeans": {
+          "silhouette": 0.5525362963930154,
+          "dominant_cluster_frac": 0.4,
+          "n_clusters": 3
+        },
+        "dbscan": {
+          "silhouette": 0.12177637437436296,
+          "dominant_cluster_frac": 0.26296296296296295,
+          "eps": 0.15868099489464657,
+          "n_clusters": 20,
+          "n_noise": 54
+        },
+        "best_method": "kmeans",
+        "best_silhouette": 0.5525362963930154,
+        "best_dominant_frac": 0.4
+      },
+      "mean_abs_cohens_d_top5": 11.5685,
+      "combined_score": 4.2482
+    },
+    "hashboard_failure": {
+      "fault_type": "hashboard_failure",
+      "n_pre_fault": 720,
+      "n_clean_sample": 20000,
+      "top10_features": [
+        {
+          "rank": 1,
+          "feature": "temp_per_power",
+          "cohens_d": 2.2028,
+          "abs_cohens_d": 2.2028,
+          "mutual_information": 0.0752
+        },
+        {
+          "rank": 2,
+          "feature": "voltage_per_power",
+          "cohens_d": 1.2567,
+          "abs_cohens_d": 1.2567,
+          "mutual_information": 0.0196
+        },
+        {
+          "rank": 3,
+          "feature": "temp_amb_c",
+          "cohens_d": 1.2437,
+          "abs_cohens_d": 1.2437,
+          "mutual_information": 0.0483
+        },
+        {
+          "rank": 4,
+          "feature": "power_w_1m_mean",
+          "cohens_d": -1.2267,
+          "abs_cohens_d": 1.2267,
+          "mutual_information": 0.0204
+        },
+        {
+          "rank": 5,
+          "feature": "power_w_5m_mean",
+          "cohens_d": -1.2261,
+          "abs_cohens_d": 1.2261,
+          "mutual_information": 0.0282
+        },
+        {
+          "rank": 6,
+          "feature": "power_w_30m_mean",
+          "cohens_d": -1.2242,
+          "abs_cohens_d": 1.2242,
+          "mutual_information": 0.0571
+        },
+        {
+          "rank": 7,
+          "feature": "power_w",
+          "cohens_d": -1.2237,
+          "abs_cohens_d": 1.2237,
+          "mutual_information": 0.0209
+        },
+        {
+          "rank": 8,
+          "feature": "hashrate_th_1m_mean",
+          "cohens_d": -1.1842,
+          "abs_cohens_d": 1.1842,
+          "mutual_information": 0.1164
+        },
+        {
+          "rank": 9,
+          "feature": "hashrate_th_5m_mean",
+          "cohens_d": -1.1833,
+          "abs_cohens_d": 1.1833,
+          "mutual_information": 0.1372
+        },
+        {
+          "rank": 10,
+          "feature": "hashrate_th",
+          "cohens_d": -1.1832,
+          "abs_cohens_d": 1.1832,
+          "mutual_information": 0.0755
+        }
+      ],
+      "top5_features": [
+        "temp_per_power",
+        "voltage_per_power",
+        "temp_amb_c",
+        "power_w_1m_mean",
+        "power_w_5m_mean"
+      ],
+      "clustering": {
+        "kmeans": {
+          "silhouette": 0.6143532893320243,
+          "dominant_cluster_frac": 0.5,
+          "n_clusters": 3
+        },
+        "dbscan": {
+          "silhouette": 0.61143596144439,
+          "dominant_cluster_frac": 0.4791666666666667,
+          "eps": 0.2019095623599686,
+          "n_clusters": 2,
+          "n_noise": 40
+        },
+        "best_method": "kmeans",
+        "best_silhouette": 0.6143532893320243,
+        "best_dominant_frac": 0.5
+      },
+      "mean_abs_cohens_d_top5": 1.4312,
+      "combined_score": 0.9128
+    },
+    "cooling_degradation": {
+      "fault_type": "cooling_degradation",
+      "n_pre_fault": 825,
+      "n_clean_sample": 20000,
+      "top10_features": [
+        {
+          "rank": 1,
+          "feature": "voltage_v_30m_mean",
+          "cohens_d": 1.59,
+          "abs_cohens_d": 1.59,
+          "mutual_information": 0.1183
+        },
+        {
+          "rank": 2,
+          "feature": "voltage_v_5m_mean",
+          "cohens_d": 1.5821,
+          "abs_cohens_d": 1.5821,
+          "mutual_information": 0.0971
+        },
+        {
+          "rank": 3,
+          "feature": "voltage_v_1m_mean",
+          "cohens_d": 1.533,
+          "abs_cohens_d": 1.533,
+          "mutual_information": 0.0687
+        },
+        {
+          "rank": 4,
+          "feature": "temp_amb_c",
+          "cohens_d": 1.532,
+          "abs_cohens_d": 1.532,
+          "mutual_information": 0.0667
+        },
+        {
+          "rank": 5,
+          "feature": "voltage_v",
+          "cohens_d": 1.0908,
+          "abs_cohens_d": 1.0908,
+          "mutual_information": 0.0246
+        },
+        {
+          "rank": 6,
+          "feature": "voltage_v_30m_std",
+          "cohens_d": -1.011,
+          "abs_cohens_d": 1.011,
+          "mutual_information": 0.04
+        },
+        {
+          "rank": 7,
+          "feature": "power_per_hashrate",
+          "cohens_d": -0.5786,
+          "abs_cohens_d": 0.5786,
+          "mutual_information": 0.0361
+        },
+        {
+          "rank": 8,
+          "feature": "voltage_v_5m_std",
+          "cohens_d": -0.5634,
+          "abs_cohens_d": 0.5634,
+          "mutual_information": 0.0114
+        },
+        {
+          "rank": 9,
+          "feature": "temp_per_power",
+          "cohens_d": 0.4416,
+          "abs_cohens_d": 0.4416,
+          "mutual_information": 0.0329
+        },
+        {
+          "rank": 10,
+          "feature": "temp_chip_c_30m_std",
+          "cohens_d": -0.4137,
+          "abs_cohens_d": 0.4137,
+          "mutual_information": 0.0135
+        }
+      ],
+      "top5_features": [
+        "voltage_v_30m_mean",
+        "voltage_v_5m_mean",
+        "voltage_v_1m_mean",
+        "temp_amb_c",
+        "voltage_v"
+      ],
+      "clustering": {
+        "kmeans": {
+          "silhouette": 0.24847431717583573,
+          "dominant_cluster_frac": 0.4218181818181818,
+          "n_clusters": 3
+        },
+        "dbscan": {
+          "silhouette": -1.0,
+          "dominant_cluster_frac": 0.0,
+          "eps": 0.9329777870465875,
+          "n_clusters": 1,
+          "n_noise": 34
+        },
+        "best_method": "kmeans",
+        "best_silhouette": 0.24847431717583573,
+        "best_dominant_frac": 0.4218181818181818
+      },
+      "mean_abs_cohens_d_top5": 1.4656,
+      "combined_score": 0.8372
+    },
+    "power_sag": {
+      "fault_type": "power_sag",
+      "n_pre_fault": 1039,
+      "n_clean_sample": 20000,
+      "top10_features": [
+        {
+          "rank": 1,
+          "feature": "temp_amb_c",
+          "cohens_d": 1.4083,
+          "abs_cohens_d": 1.4083,
+          "mutual_information": 0.0693
+        },
+        {
+          "rank": 2,
+          "feature": "voltage_v_30m_std",
+          "cohens_d": -0.7811,
+          "abs_cohens_d": 0.7811,
+          "mutual_information": 0.0349
+        },
+        {
+          "rank": 3,
+          "feature": "power_per_hashrate",
+          "cohens_d": 0.774,
+          "abs_cohens_d": 0.774,
+          "mutual_information": 0.0689
+        },
+        {
+          "rank": 4,
+          "feature": "temp_per_power",
+          "cohens_d": 0.6363,
+          "abs_cohens_d": 0.6363,
+          "mutual_information": 0.043
+        },
+        {
+          "rank": 5,
+          "feature": "fan_rpm_mean_5m_std",
+          "cohens_d": 0.3575,
+          "abs_cohens_d": 0.3575,
+          "mutual_information": 0.0112
+        },
+        {
+          "rank": 6,
+          "feature": "voltage_v_5m_mean",
+          "cohens_d": 0.3508,
+          "abs_cohens_d": 0.3508,
+          "mutual_information": 0.1009
+        },
+        {
+          "rank": 7,
+          "feature": "voltage_v_1m_mean",
+          "cohens_d": 0.3469,
+          "abs_cohens_d": 0.3469,
+          "mutual_information": 0.0703
+        },
+        {
+          "rank": 8,
+          "feature": "fan_rpm_mean_30m_std",
+          "cohens_d": 0.3455,
+          "abs_cohens_d": 0.3455,
+          "mutual_information": 0.0219
+        },
+        {
+          "rank": 9,
+          "feature": "voltage_v_30m_mean",
+          "cohens_d": 0.3391,
+          "abs_cohens_d": 0.3391,
+          "mutual_information": 0.1482
+        },
+        {
+          "rank": 10,
+          "feature": "temp_chip_c_1m_mean",
+          "cohens_d": 0.3187,
+          "abs_cohens_d": 0.3187,
+          "mutual_information": 0.0793
+        }
+      ],
+      "top5_features": [
+        "temp_amb_c",
+        "voltage_v_30m_std",
+        "power_per_hashrate",
+        "temp_per_power",
+        "fan_rpm_mean_5m_std"
+      ],
+      "clustering": {
+        "kmeans": {
+          "silhouette": 0.42912932106142043,
+          "dominant_cluster_frac": 0.3455245428296439,
+          "n_clusters": 3
+        },
+        "dbscan": {
+          "silhouette": 0.2449217722737636,
+          "dominant_cluster_frac": 0.6227141482194418,
+          "eps": 0.7257886127112144,
+          "n_clusters": 3,
+          "n_noise": 44
+        },
+        "best_method": "kmeans",
+        "best_silhouette": 0.42912932106142043,
+        "best_dominant_frac": 0.3455245428296439
+      },
+      "mean_abs_cohens_d_top5": 0.7915,
+      "combined_score": 0.6172
+    }
+  },
+  "selected_patterns": [
+    {
+      "pattern_id": "pattern_1",
+      "fault_target": "chip_instability",
+      "rank_by_combined_score": 1,
+      "combined_score": 4.2482,
+      "mean_abs_cohens_d_top5": 11.5685,
+      "best_silhouette": 0.5525362963930154,
+      "best_dominant_cluster_frac": 0.4,
+      "top5_features": [
+        "hashrate_th_30m_std",
+        "power_w_30m_std",
+        "hashrate_th_5m_std",
+        "temp_chip_c_30m_std",
+        "power_w_5m_std"
+      ],
+      "top3_cohens_d": [
+        {
+          "feature": "hashrate_th_30m_std",
+          "cohens_d": 12.7321
+        },
+        {
+          "feature": "power_w_30m_std",
+          "cohens_d": 12.1163
+        },
+        {
+          "feature": "hashrate_th_5m_std",
+          "cohens_d": 11.4681
+        }
+      ],
+      "examples": [
+        {
+          "miner_id": "m020",
+          "pre_fault_start_ts": "2026-04-21 18:10:58.369552+00:00",
+          "onset_ts": "2026-04-21 18:11:14.694091+00:00",
+          "minutes_to_onset": 0.27,
+          "features_at_start": {
+            "hashrate_th_30m_std": 3.095,
+            "power_w_30m_std": 98.3685,
+            "hashrate_th_5m_std": 3.3606
+          }
+        },
+        {
+          "miner_id": "m038",
+          "pre_fault_start_ts": "2026-04-21 18:09:52.839414+00:00",
+          "onset_ts": "2026-04-21 18:11:07.817409+00:00",
+          "minutes_to_onset": 1.25,
+          "features_at_start": {
+            "hashrate_th_30m_std": 2.8868,
+            "power_w_30m_std": 91.9821,
+            "hashrate_th_5m_std": 3.0287
+          }
+        },
+        {
+          "miner_id": "m005",
+          "pre_fault_start_ts": "2026-04-21 18:08:51.092608+00:00",
+          "onset_ts": "2026-04-21 18:10:16.789568+00:00",
+          "minutes_to_onset": 1.43,
+          "features_at_start": {
+            "hashrate_th_30m_std": 2.6607,
+            "power_w_30m_std": 79.7987,
+            "hashrate_th_5m_std": 2.8053
+          }
+        }
+      ]
+    },
+    {
+      "pattern_id": "pattern_2",
+      "fault_target": "hashboard_failure",
+      "rank_by_combined_score": 2,
+      "combined_score": 0.9128,
+      "mean_abs_cohens_d_top5": 1.4312,
+      "best_silhouette": 0.6143532893320243,
+      "best_dominant_cluster_frac": 0.5,
+      "top5_features": [
+        "temp_per_power",
+        "voltage_per_power",
+        "temp_amb_c",
+        "power_w_1m_mean",
+        "power_w_5m_mean"
+      ],
+      "top3_cohens_d": [
+        {
+          "feature": "temp_per_power",
+          "cohens_d": 2.2028
+        },
+        {
+          "feature": "voltage_per_power",
+          "cohens_d": 1.2567
+        },
+        {
+          "feature": "temp_amb_c",
+          "cohens_d": 1.2437
+        }
+      ],
+      "examples": [
+        {
+          "miner_id": "m019",
+          "pre_fault_start_ts": "2026-04-21 18:09:12.017510+00:00",
+          "onset_ts": "2026-04-21 18:10:43.325087+00:00",
+          "minutes_to_onset": 1.52,
+          "features_at_start": {
+            "temp_per_power": 0.026,
+            "voltage_per_power": 0.0045,
+            "temp_amb_c": 23.81
+          }
+        },
+        {
+          "miner_id": "m036",
+          "pre_fault_start_ts": "2026-04-21 18:09:33.452480+00:00",
+          "onset_ts": "2026-04-21 18:11:04.500481+00:00",
+          "minutes_to_onset": 1.52,
+          "features_at_start": {
+            "temp_per_power": 0.0238,
+            "voltage_per_power": 0.0037,
+            "temp_amb_c": 23.86
+          }
+        }
+      ]
+    },
+    {
+      "pattern_id": "pattern_3",
+      "fault_target": "cooling_degradation",
+      "rank_by_combined_score": 3,
+      "combined_score": 0.8372,
+      "mean_abs_cohens_d_top5": 1.4656,
+      "best_silhouette": 0.24847431717583573,
+      "best_dominant_cluster_frac": 0.4218181818181818,
+      "top5_features": [
+        "voltage_v_30m_mean",
+        "voltage_v_5m_mean",
+        "voltage_v_1m_mean",
+        "temp_amb_c",
+        "voltage_v"
+      ],
+      "top3_cohens_d": [
+        {
+          "feature": "voltage_v_30m_mean",
+          "cohens_d": 1.59
+        },
+        {
+          "feature": "voltage_v_5m_mean",
+          "cohens_d": 1.5821
+        },
+        {
+          "feature": "voltage_v_1m_mean",
+          "cohens_d": 1.533
+        }
+      ],
+      "examples": [
+        {
+          "miner_id": "m033",
+          "pre_fault_start_ts": "2026-04-21 18:08:26.875246+00:00",
+          "onset_ts": "2026-04-21 18:09:51.304417+00:00",
+          "minutes_to_onset": 1.41,
+          "features_at_start": {
+            "voltage_v_30m_mean": 12.083,
+            "voltage_v_5m_mean": 12.083,
+            "voltage_v_1m_mean": 12.083
+          }
+        },
+        {
+          "miner_id": "m008",
+          "pre_fault_start_ts": "2026-04-21 18:09:30.628313+00:00",
+          "onset_ts": "2026-04-21 18:09:45.423690+00:00",
+          "minutes_to_onset": 0.25,
+          "features_at_start": {
+            "voltage_v_30m_mean": 12.0369,
+            "voltage_v_5m_mean": 12.0435,
+            "voltage_v_1m_mean": 12.0555
+          }
+        },
+        {
+          "miner_id": "m042",
+          "pre_fault_start_ts": "2026-04-21 18:08:32.759119+00:00",
+          "onset_ts": "2026-04-21 18:09:14.325715+00:00",
+          "minutes_to_onset": 0.69,
+          "features_at_start": {
+            "voltage_v_30m_mean": 12.0294,
+            "voltage_v_5m_mean": 12.0294,
+            "voltage_v_1m_mean": 12.0343
+          }
+        }
+      ]
+    }
+  ],
+  "dropped_patterns": [
+    {
+      "fault_type": "power_sag",
+      "reason": "ranked 4th or lower by combined_score=0.6172"
+    }
+  ]
+}

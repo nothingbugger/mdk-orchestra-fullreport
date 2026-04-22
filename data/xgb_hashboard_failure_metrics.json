@@ -1,0 +1,139 @@
+{
+  "pattern_name": "thermal_electrical_decoupling",
+  "fault_target": "hashboard_failure",
+  "split_method": "miner_wise_80_20",
+  "evaluation_note": "All fault miners for this pattern are in m001-m040 (strict train side). Strict test set (m041-m050) has 0 positives \u2014 reported openly. Evaluation metrics are from a leave-one-fault-miner-out internal hold-out within the 40 train miners (held-out fault miner: m036). Final model is retrained on all 40 train miners.",
+  "description": "Pattern=thermal_electrical_decoupling, target=hashboard_failure. Binary: pre_fault_hashboard_failure (pos=1) vs clean (neg=0). Rows with current_fault or pre_fault for other targets are dropped.",
+  "primary": {
+    "roc_auc": 0.7453,
+    "pr_auc": 0.8045,
+    "precision_at_top_10pct": 0.8852,
+    "recall_at_top_10pct": 0.15,
+    "log_loss": 7.1692,
+    "brier_score": 0.5825,
+    "confusion_at_default_threshold": {
+      "TN": 258,
+      "FP": 0,
+      "FN": 360,
+      "TP": 0
+    }
+  },
+  "dataset": {
+    "source": "<REPO_ROOT>/pattern_discovery/features.parquet",
+    "n_train_full": 97082,
+    "n_test_strict": 17280,
+    "n_pos_train": 720,
+    "n_neg_train": 96362,
+    "n_pos_strict_test": 0,
+    "train_miners_count": 40,
+    "test_miners_count": 6,
+    "train_miners": [
+      "m001",
+      "m002",
+      "m003",
+      "m004",
+      "m005",
+      "m006",
+      "m007",
+      "m009",
+      "m010",
+      "m011",
+      "m012",
+      "m013",
+      "m014",
+      "m015",
+      "m016",
+      "m017",
+      "m018",
+      "m019",
+      "m020",
+      "m021",
+      "m022",
+      "m023",
+      "m024",
+      "m025",
+      "m026",
+      "m027",
+      "m028",
+      "m029",
+      "m030",
+      "m031",
+      "m032",
+      "m034",
+      "m035",
+      "m036",
+      "m037",
+      "m038",
+      "m039",
+      "m040",
+      "m041",
+      "m043"
+    ],
+    "test_miners": [
+      "m045",
+      "m046",
+      "m047",
+      "m048",
+      "m049",
+      "m050"
+    ],
+    "fault_miners_all": [
+      "m019",
+      "m036"
+    ],
+    "fault_miners_in_train": [
+      "m019",
+      "m036"
+    ],
+    "fault_miners_in_test": [],
+    "train_pos_by_miner": {
+      "m019": 360,
+      "m036": 360
+    },
+    "test_pos_by_miner": {},
+    "eval_held_out_miner": "m036",
+    "eval_n_pos": 360,
+    "positive_rate_train": 0.0074
+  },
+  "feature_importance_top5": [
+    {
+      "name": "hashrate_th_1m_mean",
+      "importance": 0.629215
+    },
+    {
+      "name": "hashrate_th",
+      "importance": 0.178186
+    },
+    {
+      "name": "temp_per_power",
+      "importance": 0.089089
+    },
+    {
+      "name": "temp_amb_c",
+      "importance": 0.065102
+    },
+    {
+      "name": "voltage_v_5m_mean",
+      "importance": 0.018582
+    }
+  ],
+  "hparams": {
+    "n_estimators": 300,
+    "max_depth": 5,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "eval_metric": "logloss",
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist",
+    "scale_pos_weight": 133.8361
+  },
+  "fit_time_s": 0.45,
+  "targets": {
+    "auc_target": 0.8,
+    "p10_target": 0.7,
+    "auc_met": false,
+    "p10_met": true
+  }
+}

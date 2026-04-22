@@ -1,0 +1,93 @@
+{
+  "split_method": "miner_wise_80_20",
+  "description": "Train on miners m001..m040, test on m041..m050. Canonical evaluation for MDK Fleet XGBoost degradation predictor. Honest OOD generalization metric.",
+  "primary": {
+    "roc_auc": 0.9283,
+    "pr_auc": 0.8368,
+    "precision_at_top_10pct": 0.9968,
+    "recall_at_top_10pct": 0.4984,
+    "log_loss": 0.4293,
+    "brier_score": 0.1226,
+    "confusion_at_default_threshold": {
+      "TN": 16459,
+      "FP": 3613,
+      "FN": 878,
+      "TP": 4140
+    }
+  },
+  "dataset": {
+    "source": "/tmp/mdk_train_data/telemetry_iter0.jsonl",
+    "n_train": 100360,
+    "n_test": 25090,
+    "train_miners_count": 40,
+    "test_miners_count": 10,
+    "positive_rate_train": 0.2057,
+    "positive_rate_test": 0.2
+  },
+  "feature_importance_top5": [
+    {
+      "name": "power_mean_1m",
+      "importance": 0.301965
+    },
+    {
+      "name": "fan_mean",
+      "importance": 0.297061
+    },
+    {
+      "name": "hr_mean_1m",
+      "importance": 0.083058
+    },
+    {
+      "name": "v_mean_1m",
+      "importance": 0.077582
+    },
+    {
+      "name": "hr_mean_6m",
+      "importance": 0.069861
+    }
+  ],
+  "hparams": {
+    "n_estimators": 300,
+    "max_depth": 5,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "eval_metric": "logloss",
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist",
+    "scale_pos_weight": 3.8617
+  },
+  "fit_time_s": 0.55,
+  "baseline_reference": {
+    "split": "random_stratified_80_20",
+    "roc_auc": 0.9998,
+    "pr_auc": 0.9993,
+    "precision_at_top_10pct": 1.0,
+    "recall_at_top_10pct": 0.4889,
+    "log_loss": 0.0194,
+    "feature_importance_top5": [
+      {
+        "name": "fan_mean",
+        "importance": 0.354922
+      },
+      {
+        "name": "power_mean_1m",
+        "importance": 0.256392
+      },
+      {
+        "name": "temp_std_1m",
+        "importance": 0.070623
+      },
+      {
+        "name": "v_mean_1m",
+        "importance": 0.064802
+      },
+      {
+        "name": "hr_mean_1m",
+        "importance": 0.056994
+      }
+    ],
+    "note": "Baseline used a random stratified split that interleaved ticks from the same miner across train and test \u2014 identity leakage inflated AUC. Kept here as reference only. See models/leakage_report.md for full analysis."
+  }
+}
